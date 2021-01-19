@@ -4,7 +4,12 @@ import android.app.Application
 import android.content.Context
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
+import androidx.databinding.library.baseAdapters.BuildConfig
 import com.llhon.wanandroid.R
+import com.orhanobut.logger.AndroidLogAdapter
+import com.orhanobut.logger.DiskLogAdapter
+import com.orhanobut.logger.Logger
+import com.orhanobut.logger.PrettyFormatStrategy
 import com.scwang.smartrefresh.header.DeliveryHeader
 import com.scwang.smartrefresh.layout.SmartRefreshLayout
 import com.scwang.smartrefresh.layout.api.RefreshLayout
@@ -53,6 +58,14 @@ open class BaseApplication: Application() {
     }
 
     private fun initGreenDao() {
-        DaoMs
+
+    }
+
+    private fun initLogger() {
+        if (BuildConfig.DEBUG) {
+            Logger.addLogAdapter(AndroidLogAdapter(PrettyFormatStrategy.newBuilder().tag(getString(R.string.app_name)).build()))
+        }
+        // TODO: 2021/1/19  
+//        Logger.addLogAdapter(DiskLogAdapter(TxtFo))
     }
 }
